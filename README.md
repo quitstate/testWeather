@@ -17,6 +17,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
 
+Create .env and use this variables
+
+NEXT_PUBLIC_OPEN_WEATHER_MAP_API_BASE="https://api.openweathermap.org/data/2.5/weather?"
+NEXT_PUBLIC_OPEN_WEATHER_MAP_API_KEY="54a275852831c97f34148ed065427b69"
+
+To use the aplication use this login and password
+
+Login: test@gmail.com
+Password: testing123
+
+To use notification alert please add first all the favorites cities, after that put all the notifications and press check to verify or add new cities to favorites.
 
 ## Deploy on Vercel
 
