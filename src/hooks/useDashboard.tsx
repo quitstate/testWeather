@@ -32,7 +32,7 @@ const useDashboard = () => {
                             type: AuthActionTypes.REMOVE_NOTIFICATIONS,
                             payload: notification,
                         });
-
+                        return ;
                     } else if (!notification.isHotOrCold && favorite.weather.temp <= parseInt(notification.temperature) && favorite.name === notification.cityName) {
                         setMessageToast(`City ${notification.cityName} is colder than ${notification.temperature} degrees`);
                         setTypeToast('warning');
@@ -41,12 +41,8 @@ const useDashboard = () => {
                             type: AuthActionTypes.REMOVE_NOTIFICATIONS,
                             payload: notification,
                         });
-                    } else {
-                        setMessageToast(`Nothing to notify`);
-                    setTypeToast('success');
-                    setShowToast(true);
-                    }
-                    
+                        return ;
+                    } 
                 })
             })
         } 
