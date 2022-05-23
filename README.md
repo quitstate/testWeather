@@ -17,6 +17,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
 
+## Instructions
+
 Create .env and use this variables
 
 NEXT_PUBLIC_OPEN_WEATHER_MAP_API_BASE="https://api.openweathermap.org/data/2.5/weather?"
