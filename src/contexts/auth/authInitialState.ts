@@ -4,5 +4,6 @@ export const authInitialState: IAuthState = {
 	email: '',
 	cities: [],
 	favorites: [],
+	notifications: []
 };
 export default authInitialState;

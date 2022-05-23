@@ -1,6 +1,6 @@
 import WeatherListResponseDto from '../../../middlewares/dtos/response/weatherList.response.dto';
 import authInitialState from '../authInitialState';
-import { City, IAuthState } from '../interfaces/AuthState.interface';
+import { AlertNotification, City, IAuthState } from '../interfaces/AuthState.interface';
 
 export class AuthMap {
 	public static getInitialState = () => {
@@ -64,6 +64,28 @@ export class AuthMap {
 		let result = [...favorites];	
 
 		return result.filter(data => data.name !== city.name);
+	};
+
+	public static addNotifications = (
+		notifications: AlertNotification[],
+		notification: AlertNotification,
+	): AlertNotification[] => {
+
+		if(!notifications.includes(notification)){
+			notifications.push(notification);
+		}
+
+		return notifications;
+	};
+
+	public static removeNotifications = (
+		notifications: AlertNotification[],
+		notification: AlertNotification,
+	): AlertNotification[] => {
+
+		let result = [...notifications];	
+
+		return result.filter(data => data.cityName !== notification.cityName);
 	};
 
 }

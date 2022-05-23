@@ -35,6 +35,18 @@ export const authReducer = (
 				favorites: AuthMap.removeFavorites(state.favorites, action.payload)
 			};
 
+		case AuthActionTypes.ADD_NOTIFICATIONS:
+			return {
+				...state,
+				notifications: AuthMap.addNotifications(state.notifications, action.payload)
+			};
+
+		case AuthActionTypes.REMOVE_NOTIFICATIONS:
+			return {
+				...state,
+				notifications: AuthMap.removeNotifications(state.notifications, action.payload)
+			};
+
 		default:
 			return { ...state };
 	}

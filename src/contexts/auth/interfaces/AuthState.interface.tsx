@@ -2,6 +2,7 @@ export interface IAuthState {
 	email: string;
 	cities: City[];
 	favorites: City[];
+	notifications: AlertNotification[];
 }
 
 export interface City {
@@ -18,4 +19,9 @@ export interface Weather {
 	temp: number;
 	temp_max: number;
 	temp_min: number;
+}
+
+export interface AlertNotification {
+	cityName: string;
+	temperature: string;
 }
