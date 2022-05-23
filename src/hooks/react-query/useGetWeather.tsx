@@ -13,12 +13,11 @@ const useGetWeather = (cityName: string, zipcode?: string) => {
         appid: process.env.NEXT_PUBLIC_OPEN_WEATHER_MAP_API_KEY,
     }
 
-	const { authState, authDispatch  } = useGetAuthContext();
+	const { authDispatch  } = useGetAuthContext();
 	const weatherResult = () => {
 		return {
 			onSuccess,
 			onError,
-			onSettled,
 			keepPreviousData: false,
 			refetchOnMount: true,
 			refetchOnWindowFocus: false,
@@ -39,8 +38,6 @@ const useGetWeather = (cityName: string, zipcode?: string) => {
 		console.log(error);
 		//toast.error(showError(iError, SERVICES.ADMIN_USERS));
 	};
-    
-	const onSettled = (data: any, error: any): void => { return; };
 
 	return useQuery(
 		REACT_QUERY.GET_WEATHER, 

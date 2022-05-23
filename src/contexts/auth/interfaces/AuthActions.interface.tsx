@@ -8,5 +8,7 @@ export enum AuthActionTypes {
 	LOGIN = 'LOGIN',
 	LOGOUT = 'LOGOUT',
 	SET_CITIES = 'SET_CITIES',
+	ADD_FAVORITES = 'ADD_FAVORITES',
+	REMOVE_FAVORITES = 'REMOVE_FAVORITES',
 }
 export default IAuthActions;

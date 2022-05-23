@@ -3,6 +3,8 @@ import InputText from '../components/InputText';
 import Layout from '../components/Layout';
 import Select from '../components/Select';
 import WeatherCard from '../components/WeatherCard';
+import { AuthActionTypes } from '../contexts/auth/interfaces/AuthActions.interface';
+import { City } from '../contexts/auth/interfaces/AuthState.interface';
 import useGetAuthContext from '../hooks/context-hooks/useGetAuthContext';
 import useGetWeather from '../hooks/react-query/useGetWeather';
 import { cities } from '../utils/Cities';
@@ -13,12 +15,12 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
     const [cityName, setCityName] = useState('Miami')
     const [stateName, setStateName] = useState('Florida')
     const [zipCode, setZipCode] = useState('')
-    const { refetch, isLoading } = useGetWeather(cityName, zipCode);
-    const { authState } = useGetAuthContext();
+    const { refetch } = useGetWeather(cityName, zipCode);
+    const { authState, authDispatch } = useGetAuthContext();
 
     useEffect(() => {
         refetch();
-    }, [cityName,zipCode]);
+    }, [cityName, zipCode]);
 
     const handleOnChangeCity = (value: any) => {
         setCityName(value);
@@ -29,6 +31,20 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
 
     const handleOnChangeZipCode = (value: any) => {
         setZipCode(value);
+    }
+
+    const handleOnClickAdd = (city: City) => {
+        authDispatch ({
+			type: AuthActionTypes.ADD_FAVORITES,
+			payload: city,
+		});
+    }
+
+    const handleOnClickRemove = (city: City) => {
+        authDispatch ({
+			type: AuthActionTypes.REMOVE_FAVORITES,
+			payload: city,
+		});
     }
 
     const renderChildren = () => {
@@ -57,7 +73,13 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
                         onChange={handleOnChangeZipCode}
                     />
                 </div>
-                <WeatherCard className='px-2 pt-4 w-full' cities={authState.cities} />
+                <WeatherCard className='px-2 pt-4 w-full' cities={authState.cities} onClickAdd={handleOnClickAdd}/>
+                <div>
+                    <h1 className="text-2xl font-bold leading-tight text-gray-900 px-2 pt-4">Favorites</h1>
+                    {
+                        authState.favorites && <WeatherCard className='px-2 pt-4 w-full' cities={authState.favorites} onClickRemove={handleOnClickRemove} />
+                    }
+                </div>
             </div>
 
         );

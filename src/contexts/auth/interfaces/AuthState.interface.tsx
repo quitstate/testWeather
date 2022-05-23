@@ -1,6 +1,7 @@
 export interface IAuthState {
 	email: string;
 	cities: City[];
+	favorites: City[];
 }
 
 export interface City {

@@ -45,6 +45,32 @@ export class AuthMap {
 		return cities;
 	};
 
+	public static addFavorites = (
+		favorites: City[],
+		city: City,
+	): City[] => {
+
+		console.log(city);
+
+		if(!favorites.includes(city)){
+			favorites.push(city);
+		}
+		
+		console.log(favorites);
+
+		return favorites;
+	};
+
+	public static removeFavorites = (
+		favorites: City[],
+		city: City,
+	): City[] => {
+
+		let result = [...favorites];	
+
+		return result.filter(data => data.name !== city.name);
+	};
+
 }
 
 export default AuthMap;

@@ -2,6 +2,7 @@ import { IAuthState } from './interfaces/AuthState.interface';
 
 export const authInitialState: IAuthState = {
 	email: '',
-	cities: []
+	cities: [],
+	favorites: [],
 };
 export default authInitialState;

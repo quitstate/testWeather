@@ -1,13 +1,18 @@
 import React from 'react';
 import { City } from '../contexts/auth/interfaces/AuthState.interface';
+import { PlusSmIcon, XCircleIcon } from '@heroicons/react/solid'
 
-export interface IWeatherCardProps { 
+export interface IWeatherCardProps {
     cities: City[];
-    className?: string; 
+    className?: string;
+    onClickAdd?: (value: any) => void;
+    onClickRemove?: (value: any) => void;
 }
 const WeatherCard: React.FC<IWeatherCardProps> = ({
     cities,
-    className
+    className,
+    onClickAdd,
+    onClickRemove
 }) => {
 
     return (
@@ -26,9 +31,27 @@ const WeatherCard: React.FC<IWeatherCardProps> = ({
                                 <p className="mt-1 text-gray-500 text-sm truncate">Weather: {city.weather.description}</p>
                                 <p className="mt-1 text-gray-500 text-sm truncate">Temperature Max: {city.weather.temp_max}°C</p>
                                 <p className="mt-1 text-gray-500 text-sm truncate">Temperature Min: {city.weather.temp_min}°C</p>
-                                
+
                             </div>
-                            <img className="w-16 h-16 bg-gray-300 rounded-full flex-shrink-0" src={`http://openweathermap.org/img/w/${city.weather.icon}.png`} alt="" />
+                            {onClickAdd &&
+                                <button
+                                    onClick={() => onClickAdd(city)}
+                                    type="button"
+                                    className="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    <PlusSmIcon className="h-5 w-5" aria-hidden="true" />
+                                </button>
+                            }
+                            {onClickRemove &&
+                                <button
+                                    onClick={() => onClickRemove(city)}
+                                    type="button"
+                                    className="inline-flex items-center p-1 border border-transparent rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                >
+                                    <XCircleIcon className="h-5 w-5" aria-hidden="true" />
+                                </button>
+                            }
+                            <img className="w-20 h-20 bg-gray-300 rounded-full flex-shrink-0" src={`http://openweathermap.org/img/w/${city.weather.icon}.png`} alt="" />
                         </div>
                     </li>
                 ))}
