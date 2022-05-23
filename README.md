@@ -1,22 +1,3 @@
-# Next.js TailwindCSS Typescript Starter
-This is a [Next.js](https://nextjs.org/) 12.x, [TailwindCSS](https://tailwindcss.com/) 3.x, and [TypeScript](https://www.typescriptlang.org/docs/home.html) 4.x starter template
-
-For more details, see my blog post. [Nextjs TailwindCSS Typescript Starter](https://dev.to/vuongddang/nextjs-tailwindcss-typescript-starter-1c2m)
-
-## How to use this template
-Here're a few ways to create your new project using this template.
-### Using `create-next-app`
-Create a new next.js app from the template using [create-next-app](https://github.com/vercel/next.js/tree/canary/packages/create-next-app)
-```
-npx create-next-app --example "https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/tree/main"
-# or
-yarn create next-app --example "https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/tree/main"
-```
-
-### Create new repository from github [template](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
-
-You can generate a new repository with the same directory structure and files by click `Use this template` button in the upper right or [click here](https://github.com/vuongddang/nextjs-tailwindcss-typescript-starter/generate).
-
 ## Getting Started
 Install dependencies:
 ```bash
@@ -36,6 +17,19 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/pages/index.js`. The page auto-updates as you edit the file.
 
+## Instructions
+
+Create .env and use this variables
+
+NEXT_PUBLIC_OPEN_WEATHER_MAP_API_BASE="https://api.openweathermap.org/data/2.5/weather?"
+NEXT_PUBLIC_OPEN_WEATHER_MAP_API_KEY="54a275852831c97f34148ed065427b69"
+
+To use the aplication use this login and password
+
+Login: test@gmail.com
+Password: testing123
+
+To use notification alert please add first all the favorites cities, after that put all the notifications and press check to verify or add new cities to favorites.
 
 ## Deploy on Vercel
 

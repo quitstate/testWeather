@@ -1,0 +1,5 @@
+enum REACT_QUERY {
+	AUTH_LOGIN = 'AUTH_LOGIN',
+	GET_WEATHER = 'GET_WEATHER',
+}
+export default REACT_QUERY;
