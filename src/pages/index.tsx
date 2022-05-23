@@ -5,8 +5,8 @@ const Home = () => {
 
     return (
         <main>
-            <LoginForm title={"Test Weather"} subTitle={"Sign in to your account"}/>
-            <Footer appName={"Test Weather"} creator={"Ronald Vezga"}/>
+            <LoginForm title={"Test Weather"} subTitle={"Sign in to your account"} />
+            <Footer appName={"Test Weather"} creator={"Ronald Vezga"} />
         </main>
     )
 }

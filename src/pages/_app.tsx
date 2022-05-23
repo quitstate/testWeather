@@ -7,7 +7,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 
 export const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
     return (
         <>
             <Head>

@@ -1,7 +1,6 @@
 import { useQuery } from 'react-query';
 import { AuthActionTypes } from '../../contexts/auth/interfaces/AuthActions.interface';
-// import { toast } from 'react-toastify';
-import { getWeather, Params } from '../../middlewares/apiWeather';
+import { getWeather } from '../../middlewares/apiWeather';
 import REACT_QUERY from '../../utils/enums/react-query';
 import useGetAuthContext from '../context-hooks/useGetAuthContext';
 
@@ -27,7 +26,6 @@ const useGetWeather = (cityName: string, zipcode?: string) => {
 	};
     
 	const onSuccess = (data: any): void => { 
-        console.log(data);
 		authDispatch ({
 			type: AuthActionTypes.SET_CITIES,
 			payload: data,
@@ -36,7 +34,6 @@ const useGetWeather = (cityName: string, zipcode?: string) => {
     
 	const onError = (error: unknown): void => {
 		console.log(error);
-		//toast.error(showError(iError, SERVICES.ADMIN_USERS));
 	};
 
 	return useQuery(

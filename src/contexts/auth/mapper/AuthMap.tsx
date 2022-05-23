@@ -26,7 +26,6 @@ export class AuthMap {
 	public static setCities = (
 		weatherResponse: WeatherListResponseDto,
 	): City[] => {
-		console.log(weatherResponse);
 		let cities: City[] = [ ...authInitialState.cities	];
 		cities.push({
 			name: weatherResponse.name,
@@ -50,13 +49,9 @@ export class AuthMap {
 		city: City,
 	): City[] => {
 
-		console.log(city);
-
 		if(!favorites.includes(city)){
 			favorites.push(city);
 		}
-		
-		console.log(favorites);
 
 		return favorites;
 	};
