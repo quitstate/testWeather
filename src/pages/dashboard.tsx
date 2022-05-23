@@ -1,4 +1,3 @@
-import { CheckCircleIcon } from '@heroicons/react/solid';
 import React, { useEffect, useState } from 'react';
 import InputText from '../components/InputText';
 import Layout from '../components/Layout';
@@ -23,26 +22,40 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
     const [showToast, setShowToast] = useState(false);
     const [messageToast, setMessageToast] = useState('');
     const [typeToast, setTypeToast] = useState<'success' | 'error' | 'warning'>('success');
-
+    const [isHotOrCold, setIsHotOrCold] = useState(false);
     const { refetch } = useGetWeather(cityName, zipCode);
     const { authState, authDispatch } = useGetAuthContext();
 
-
-    useEffect(() => {
-        refetch();
-
-        if(authState.notifications.length > 0){
+    const checkNotifications = () => {
+        if (authState.notifications.length > 0) {
             authState.notifications.forEach((notification) => {
                 authState.favorites.forEach((favorite) => {
-                    if(favorite.weather.temp >= parseInt(notification.temperature)){
+                    if (notification.isHotOrCold && favorite.weather.temp >= parseInt(notification.temperature)) {
                         setMessageToast(`City ${notification.cityName} is hotter than ${notification.temperature} degrees`);
                         setTypeToast('warning');
                         setShowToast(true);
+                        authDispatch({
+                            type: AuthActionTypes.REMOVE_NOTIFICATIONS,
+                            payload: notification,
+                        });
+                    } else if(!notification.isHotOrCold && favorite.weather.temp <= parseInt(notification.temperature)) {
+                        setMessageToast(`City ${notification.cityName} is colder than ${notification.temperature} degrees`);
+                        setTypeToast('warning');
+                        setShowToast(true);
+                        authDispatch({
+                            type: AuthActionTypes.REMOVE_NOTIFICATIONS,
+                            payload: notification,
+                        });
                     }
                 })
             })
         }
+    }
 
+    useEffect(() => {
+        refetch();
+        checkNotifications();
+        
 
     }, [cityName, zipCode, authState.notifications]);
 
@@ -75,9 +88,13 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
             type: AuthActionTypes.ADD_NOTIFICATIONS,
             payload: {
                 cityName: cityNotification,
-                temperature: temperature
+                temperature: temperature,
+                isHotOrCold: isHotOrCold
             },
         });
+        setMessageToast(`City ${cityNotification} added to notifications`);
+        setTypeToast('success');
+        setShowToast(true);
     }
 
     const handleOnClickAdd = (city: City) => {
@@ -109,6 +126,8 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
         setTypeToast('success');
         setShowToast(true);
     }
+
+    
 
     const renderChildren = () => {
         return (
@@ -162,17 +181,31 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
                         />
                         <button
                             type="button"
-                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            onClick={() => setIsHotOrCold(!isHotOrCold)}
+                            className={` inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded shadow-sm text-white ${isHotOrCold ? 'bg-red-500 focus:ring-red-500' : 'bg-blue-500 focus:ring-blue-500'} focus:outline-none focus:ring-2 focus:ring-offset-2`}
+                        >
+                            {isHotOrCold ? 'Hot' : 'Cold'}
+                        </button>
+                        <button
+                            type="button"
+                            className="mx-2 inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             onClick={handleOnClickAddNotification}
                         >
                             Add Notification
+                        </button>
+                        <button
+                            type="button"
+                            className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            onClick={checkNotifications}
+                        >
+                            Check Notification
                         </button>
                     </div>
                 </div>
                 <div>
                     <h1 className="text-2xl font-bold leading-tight text-gray-900 px-2 pt-4">Notifications</h1>
                     {
-                        authState.notifications.length > 0 && <NotificationCard alertNotifications={authState.notifications} onClickRemove={handleOnClickRemoveNotification}/>
+                        authState.notifications.length > 0 && <NotificationCard alertNotifications={authState.notifications} onClickRemove={handleOnClickRemoveNotification} isHotOrCold={isHotOrCold} setIsHotOrCold={setIsHotOrCold} />
                     }
                 </div>
             </div>

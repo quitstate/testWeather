@@ -24,4 +24,5 @@ export interface Weather {
 export interface AlertNotification {
 	cityName: string;
 	temperature: string;
+	isHotOrCold: boolean;
 }
