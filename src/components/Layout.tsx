@@ -21,7 +21,7 @@ const Layout: React.FC<ILayoutsProps> = ({
     }
 
     const navigation = [
-        { name: 'Dashboard', href: '', current: true },
+        { name: 'Dashboard', href: '/dashboard', current: true },
     ]
 
     const userNavigation = [
@@ -44,9 +44,9 @@ const Layout: React.FC<ILayoutsProps> = ({
                                         </div>
                                         <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
                                             {navigation.map((item) => (
-                                                <a
+                                                <button
+                                                    disabled={item.current}
                                                     key={item.name}
-                                                    href={item.href}
                                                     className={classNames(
                                                         item.current
                                                             ? 'border-indigo-500 text-gray-900'
@@ -56,7 +56,7 @@ const Layout: React.FC<ILayoutsProps> = ({
                                                     aria-current={item.current ? 'page' : undefined}
                                                 >
                                                     {item.name}
-                                                </a>
+                                                </button>
                                             ))}
                                         </div>
                                     </div>
