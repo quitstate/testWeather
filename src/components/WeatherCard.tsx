@@ -2,14 +2,16 @@ import React from 'react';
 import { City } from '../contexts/auth/interfaces/AuthState.interface';
 
 export interface IWeatherCardProps { 
-    cities: City[]; 
+    cities: City[];
+    className?: string; 
 }
 const WeatherCard: React.FC<IWeatherCardProps> = ({
-    cities
+    cities,
+    className
 }) => {
 
     return (
-        <div className=''>
+        <div className={className}>
             <ul role="list" className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {cities.map((city) => (
                     <li key={city.name} className="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">

@@ -5,11 +5,13 @@ import { getWeather, Params } from '../../middlewares/apiWeather';
 import REACT_QUERY from '../../utils/enums/react-query';
 import useGetAuthContext from '../context-hooks/useGetAuthContext';
 
-const useGetWeather = () => {
+const useGetWeather = (cityName: string, zipcode?: string) => {
 
-    let params: Params = {
-        appid: ''
-    };
+    let params = {
+        q: `${cityName},${zipcode},us`,
+        units: 'metric',
+        appid: process.env.NEXT_PUBLIC_OPEN_WEATHER_MAP_API_KEY,
+    }
 
 	const { authState, authDispatch  } = useGetAuthContext();
 	const weatherResult = () => {
