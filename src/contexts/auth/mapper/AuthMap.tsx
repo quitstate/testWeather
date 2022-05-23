@@ -9,10 +9,10 @@ export class AuthMap {
 
 	public static getLoginState = (data: any): IAuthState => {
 		try {
-			const { email } = data;
 			return {
 				...authInitialState,
-				email,
+				email: data,
+				isAuthenticated: true,
 			};
 		} catch (error) {
 			return { ...authInitialState };
@@ -20,7 +20,7 @@ export class AuthMap {
 	};
 
 	public static getLogoutState = (): IAuthState => {
-		return { ...authInitialState };
+		return { ...authInitialState, isAuthenticated: false };
 	};
 
 	public static setCities = (

@@ -12,10 +12,10 @@ export const authReducer = (
 			return { ...state, ...AuthMap.getInitialState() };
 
 		case AuthActionTypes.LOGIN:
-			return { ...state, ...AuthMap.getLoginState(action.payload.data) };
+			return { ...AuthMap.getLoginState(action.payload) };
 
 		case AuthActionTypes.LOGOUT:
-			return { ...state, ...AuthMap.getLogoutState() };
+			return { ...AuthMap.getLogoutState() };
 
 		case AuthActionTypes.SET_CITIES:
 			return {

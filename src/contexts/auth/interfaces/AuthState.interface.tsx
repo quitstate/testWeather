@@ -1,4 +1,5 @@
 export interface IAuthState {
+	isAuthenticated: boolean;
 	email: string;
 	cities: City[];
 	favorites: City[];

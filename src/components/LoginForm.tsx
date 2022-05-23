@@ -2,6 +2,7 @@ import React from 'react';
 import LogoIcon from '../assets/LogoIcon';
 import useLoginForm from '../hooks/useLoginForm';
 import { validEmail, validPassword } from '../utils/RegexValidate';
+import Toast from './Toast';
 
 export interface ILoginFormProps {
     title: string;
@@ -13,11 +14,15 @@ const LoginForm: React.FC<ILoginFormProps> = ({
 }) => {
 
     const {
+        showToast,
+        messageToast,
+        typeToast,
         email,
         password,
         setEmail,
         setPassword,
-        onSubmit
+        onSubmit,
+        handleOnCloseToast
     } = useLoginForm();
 
     const isDisabled = !validEmail.test(email) || !validPassword.test(password);
@@ -99,6 +104,7 @@ const LoginForm: React.FC<ILoginFormProps> = ({
                 </div>
             </div>
         </div>
+        <Toast message={messageToast} show={showToast} onClose={handleOnCloseToast} type={typeToast} />
     </>;
 };
 

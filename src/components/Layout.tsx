@@ -6,9 +6,11 @@ import { classNames } from '../utils/classNames';
 
 export interface ILayoutsProps {
     children?: JSX.Element | JSX.Element[] | React.FC | ReactChild[] & (boolean | ReactChild | ReactFragment | ReactPortal | null);
+    handleOnClickSignOut: () => void;
 }
 const Layout: React.FC<ILayoutsProps> = ({
-    children
+    children,
+    handleOnClickSignOut
 }) => {
 
     const user = {
@@ -84,21 +86,19 @@ const Layout: React.FC<ILayoutsProps> = ({
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
                                                 <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                    {userNavigation.map((item) => (
-                                                        <Menu.Item key={item.name}>
+                                                        <Menu.Item>
                                                             {({ active }) => (
-                                                                <a
-                                                                    href={item.href}
+                                                                <button
                                                                     className={classNames(
                                                                         active ? 'bg-gray-100' : '',
-                                                                        'block px-4 py-2 text-sm text-gray-700'
+                                                                        'block px-4 py-2 text-sm text-gray-700 w-full'
                                                                     )}
+                                                                    onClick={handleOnClickSignOut}
                                                                 >
-                                                                    {item.name}
-                                                                </a>
+                                                                    Sign out
+                                                                </button>
                                                             )}
                                                         </Menu.Item>
-                                                    ))}
                                                 </Menu.Items>
                                             </Transition>
                                         </Menu>
