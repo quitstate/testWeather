@@ -7,6 +7,7 @@ import Toast from '../components/Toast';
 import WeatherCard from '../components/WeatherCard';
 import { cities } from '../utils/Cities';
 import useDashboard from '../hooks/useDashboard';
+import Footer from '../components/Footer';
 
 export interface IDashboardViewProps { }
 const dashboard: React.FC<IDashboardViewProps> = () => {
@@ -132,6 +133,7 @@ const dashboard: React.FC<IDashboardViewProps> = () => {
         <div className=''>
             <Layout children={renderChildren()} handleOnClickSignOut={handleOnClickSignOut} />
             <Toast message={messageToast} show={showToast} onClose={handleOnCloseToast} type={typeToast} />
+            <Footer appName={"Test Weather"} creator={"Ronald Vezga"} />
         </div>
     );
 };
